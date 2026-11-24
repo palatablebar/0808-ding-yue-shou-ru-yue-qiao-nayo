@@ -53,3 +53,9 @@ body.columns {margin:0;background:var(--bg);color:var(--ink);font:var(--size)/1.
 .bridge-tower .mark-piece {height:max(25px,var(--part));padding:2px;background:var(--button);color:var(--ink);border-top:4px solid var(--accent)}
 .bridge-tower:is(.bridge-2,.bridge-3) .mark-piece {border-top-color:var(--alert)}
 .bridge-total {margin-top:10px;font-weight:800;font-size:1.25rem}
+
+/* 补偿视图：冲减与期末用强调色，避免把期末误读为告警 */
+html[data-kind="compensation"] .bridge-tower .mark-piece {border-top-color:var(--accent)}
+html[data-kind="compensation"] .bridge-tower.bridge-2 .mark-piece {border-top-color:var(--line)}
+.columns .badge[data-result="APPLIED"],.columns .badge[data-result="RETAINED"] {color:var(--accent)}
+.columns .badge[data-result="SETTLED"],.columns .badge[data-result="USED"] {color:var(--sub)}

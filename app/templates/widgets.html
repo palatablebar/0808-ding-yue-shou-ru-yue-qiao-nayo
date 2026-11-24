@@ -8,7 +8,12 @@
 {% endmacro %}
 {% macro intake() %}
 <form class="source" id="source" aria-label="批次输入">
-  <label>输入样例 <select id="profile"><option value="dirty">带异常样例</option><option value="clean">可签发样例</option></select></label>
+  <label>输入样例 <select id="profile">
+    <option value="dirty">收入 · 带异常样例</option>
+    <option value="clean">收入 · 可签发样例</option>
+    <option value="compensation">补偿 · 可签发样例</option>
+    <option value="blocked">补偿 · 拒签样例</option>
+  </select></label>
   <label for="file" class="file">上传 CSV</label><input id="file" type="file" accept=".csv,text/csv"><span id="file-name" aria-live="polite"></span>
   <button type="submit" class="action">执行批次</button>
 </form>
@@ -16,7 +21,7 @@
 {% macro metrics() %}
 <div class="kpis" aria-label="输入统计">
   {% for key, text in [('input','输入行'), ('accepted','采信行'), ('isolated','隔离行'), ('cases','业务组')] %}
-  <div class="metric"><span>{{ text }}</span><strong data-metric="{{ key }}">—</strong></div>
+  <div class="metric"><span{% if key == 'cases' %} data-metric-label="cases"{% endif %}>{{ text }}</span><strong data-metric="{{ key }}">—</strong></div>
   {% endfor %}
 </div>
 {% endmacro %}

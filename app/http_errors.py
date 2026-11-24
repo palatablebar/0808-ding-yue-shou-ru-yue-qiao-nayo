@@ -15,6 +15,7 @@ LABELS = {
     "STALE_REVIEW": "批次已更新，请刷新",
     "RUN_FINALIZED": "批次已签发",
     "UNRESOLVED_ISSUES": "存在待处理差异",
+    "COMPENSATION_ALREADY_POSTED": "补偿已由其他批次签发",
     "SAMPLE_UNKNOWN": "样例不存在",
     "STAGE_UNKNOWN": "处理阶段不存在",
 }

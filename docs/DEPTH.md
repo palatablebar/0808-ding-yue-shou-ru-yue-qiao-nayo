@@ -35,3 +35,16 @@
 minute 为结算窗口起点后的分钟。月桥使用 [0, close) 半开区间，同一时刻按来源序列执行。新增和重新激活合计，收缩与流失作为减项。
 
 逐组预期结论见 `tests/test_policy.py`，计算过程证据见 `tests/test_calculate.py`。
+
+## 补偿抵扣模块
+
+| 模块 | 动作 | 接口 | 核心文件 | 测试 |
+|---|---|---|---|---|
+| C1 账单采信 | 去重、隔离坏行、保留源行号 | `POST /api/stages/intake` | `app/compensation/service.py` | `tests/test_compensation_flow.py` |
+| C2 账单校验 | 期间、日期、金额与使用额 | `POST /api/stages/prepare` | `app/compensation/schema.py` | `tests/test_compensation_flow.py` |
+| C3 抵扣计算 | 有回执冲减、有效留存、当月失效了结 | `POST /api/stages/calculate` | `app/compensation/offset.py` | `tests/test_compensation.py` |
+| C4 余额判定 | 失效挂账、回执倒挂、跨期回执拒签 | `POST /api/stages/policy` | `app/compensation/offset.py` | `tests/test_compensation.py` |
+| C5 抵扣对账 | 逐客户与总计守恒 | `POST /api/stages/balance` | `app/compensation/pipeline.py` | `tests/test_compensation_flow.py` |
+| C6 台账幂等 | 签发入账、重复执行跳过 | `PATCH /api/runs/<id>`、`GET /api/ledger` | `app/review/store.py` | `tests/test_compensation_flow.py` |
+
+输入分流见 `app/compensation/detect.py`；口径与拒签条件见 [补偿抵扣](COMPENSATION.md)。

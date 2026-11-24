@@ -12,3 +12,15 @@ PROJECT = {
     ],
     "chart": "净变动",
 }
+COMPENSATION = {
+    "name": "补偿抵扣月结",
+    "actor": "收入会计",
+    "stages": [
+        ("intake", "账单采信"),
+        ("prepare", "账单校验"),
+        ("calculate", "抵扣计算"),
+        ("policy", "余额判定"),
+        ("balance", "抵扣对账"),
+    ],
+    "chart": "客户余额桥",
+}
